@@ -9,20 +9,84 @@
 <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
 
 <style>
-    html, body {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background: #ffffff;
-        font-family: Arial, sans-serif;
-    }
+/* FULL SCREEN RESET */
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #ffffff;
+    font-family: Arial, sans-serif;
+}
 
-    #webchat {
-        width: 100vw;
-        height: 100vh;
-    }
+/* WEBCHAT CONTAINER */
+#webchat {
+    width: 100vw;
+    height: 100vh;
+}
+
+/* =========================
+   ✅ CHAT BUBBLE FIXES
+   ========================= */
+
+/* Force assistant bubbles to use screen width */
+.webchat__bubble {
+    max-width: 96% !important;
+}
+
+/* Stretch bubble content */
+.webchat__bubble__content {
+    width: 100%;
+}
+
+/* =========================
+   ✅ TABLE FIXES
+   ========================= */
+
+.webchat__bubble table {
+    width: 100% !important;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+/* Table headers & cells */
+.webchat__bubble th,
+.webchat__bubble td {
+    padding: 8px 12px;
+    border: 1px solid #d0d7e2;
+    text-align: left;
+    vertical-align: middle;
+    white-space: nowrap;       /* KEEP SINGLE LINE */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Header styling */
+.webchat__bubble th {
+    background-color: #e6f0ff;
+    font-weight: bold;
+}
+
+/* Optional wrap class for long text */
+.webchat__bubble td.wrap {
+    white-space: normal;
+}
+
+/* Improve row spacing */
+.webchat__bubble tr {
+    line-height: 1.4;
+}
+
+/* =========================
+   ✅ MOBILE SCROLL SAFETY
+   ========================= */
+
+.webchat__bubble table {
+    display: block;
+    overflow-x: auto;
+    max-width: 100%;
+}
 </style>
 </head>
 
@@ -38,15 +102,21 @@
     const styleOptions = {
         backgroundColor: "#ffffff",
 
-        // Assistant messages
+        /* 🔑 THIS FIXES WIDTH ISSUES */
+        bubbleMaxWidth: 1200,
+
+        /* Assistant messages */
         bubbleBackground: "#F0F6FF",
         bubbleBorderRadius: 14,
 
-        // User messages
+        /* User messages */
         bubbleFromUserBackground: "#FFFFFF",
         bubbleFromUserBorderRadius: 14,
 
-        primaryFont: "Arial"
+        primaryFont: "Arial",
+        fontSizeSmall: "14px",
+        fontSizeMedium: "16px",
+        fontSizeLarge: "18px"
     };
 
     window.WebChat.renderWebChat(
