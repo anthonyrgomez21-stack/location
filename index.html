@@ -5,9 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>AI Assistant</title>
 
+<!-- Bot Framework Web Chat -->
 <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
 
 <style>
+/* ================================
+   GLOBAL RESET
+================================ */
 html, body {
     width: 100%;
     height: 100%;
@@ -17,32 +21,84 @@ html, body {
     font-family: Arial, sans-serif;
 }
 
-/* Full screen container */
+/* Full screen webchat */
 #webchat {
     width: 100vw;
     height: 100vh;
 }
 
-/* ✅ ONLY safe override: allow markdown content to breathe */
+/* ================================
+   SAFE MARKDOWN TABLE STYLING
+================================ */
 .markdown {
     max-width: 100% !important;
 }
 
-/* ✅ Allow tables to scroll instead of squish */
+/* Table layout */
 .markdown table {
-    width: max-content;
-    max-width: 100%;
+    width: max-content;      /* don't squish */
+    min-width: 100%;
+    border-collapse: separate;
+    border-spacing: 20px 0;  /* ✅ space between columns */
     display: block;
     overflow-x: auto;
-    border-collapse: collapse;
 }
 
-/* ✅ Clean cell behavior */
+/* Table cells */
 .markdown th,
 .markdown td {
-    padding: 8px 12px;
-    white-space: nowrap;
+    padding: 10px 20px;
+    white-space: nowrap;     /* ✅ keep rows single-line */
     border: 1px solid #d6dbe6;
+    text-align: left;
+    font-size: 15px;
+}
+
+/* Header styling */
+.markdown th {
+    background-color: #e6f0ff;
+    font-weight: 700;
+}
+
+/* ================================
+   COLUMN WIDTH CONTROL
+   (Created On ≠ Work Order Number)
+================================ */
+
+/* Created On */
+.markdown th:nth-child(1),
+.markdown td:nth-child(1) {
+    min-width: 140px;
+}
+
+/* Work Order Number */
+.markdown th:nth-child(2),
+.markdown td:nth-child(2) {
+    min-width: 220px;
+}
+
+/* Description */
+.markdown th:nth-child(3),
+.markdown td:nth-child(3) {
+    min-width: 360px;
+}
+
+/* Functional Location */
+.markdown th:nth-child(4),
+.markdown td:nth-child(4) {
+    min-width: 260px;
+}
+
+/* Priority */
+.markdown th:nth-child(5),
+.markdown td:nth-child(5) {
+    min-width: 120px;
+}
+
+/* Primary Work Center */
+.markdown th:nth-child(6),
+.markdown td:nth-child(6) {
+    min-width: 280px;
 }
 </style>
 </head>
@@ -59,12 +115,14 @@ html, body {
     const styleOptions = {
         backgroundColor: "#ffffff",
 
-        /* ✅ THIS IS THE REAL FIX */
+        /* ✅ NATURAL, SUPPORTED BUBBLE STRETCH */
         bubbleMaxWidth: "90%",
 
-        /* Chat bubbles */
+        /* Assistant bubbles */
         bubbleBackground: "#F0F6FF",
         bubbleBorderRadius: 14,
+
+        /* User bubbles */
         bubbleFromUserBackground: "#FFFFFF",
         bubbleFromUserBorderRadius: 14,
 
