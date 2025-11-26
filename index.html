@@ -3,106 +3,52 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Equipment AI Agent</title>
+<title>AI Assistant</title>
 
-<!-- Bot Framework Web Chat -->
 <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
 
 <style>
-/* ================================
-   GLOBAL RESET
-================================ */
 html, body {
     width: 100%;
     height: 100%;
     margin: 0;
+    overflow: hidden;
     background: #ffffff;
     font-family: Arial, sans-serif;
-    overflow: hidden;
 }
 
-/* ================================
-   HEADER
-================================ */
-.chat-header {
-    background-color: #005EB8; /* Orlen blue */
-    color: #ffffff;
-    padding: 16px 12px;
-    font-size: 22px;
-    font-weight: 600;
-    text-align: center;
-    letter-spacing: 0.5px;
-    border-bottom: 3px solid #D71920; /* skinny red line */
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-}
-
-/* ================================
-   WEBCHAT CONTAINER
-================================ */
+/* Full screen container */
 #webchat {
     width: 100vw;
-    height: calc(100vh - 64px); /* header-aware height */
+    height: 100vh;
 }
 
-/* ================================
-   MARKDOWN TABLE STYLING
-================================ */
+/* ✅ ONLY safe override: allow markdown content to breathe */
 .markdown {
     max-width: 100% !important;
 }
 
+/* ✅ Allow tables to scroll instead of squish */
 .markdown table {
     width: max-content;
-    min-width: 100%;
-    border-collapse: separate;
-    border-spacing: 20px 0;
+    max-width: 100%;
     display: block;
     overflow-x: auto;
+    border-collapse: collapse;
 }
 
+/* ✅ Clean cell behavior */
 .markdown th,
 .markdown td {
-    padding: 10px 20px;
+    padding: 8px 12px;
     white-space: nowrap;
     border: 1px solid #d6dbe6;
-    text-align: left;
-    font-size: 15px;
 }
-
-.markdown th {
-    background-color: #e6f0ff;
-    font-weight: 700;
-}
-
-/* ================================
-   COLUMN WIDTH CONTROL
-================================ */
-.markdown th:nth-child(1),
-.markdown td:nth-child(1) { min-width: 140px; }
-
-.markdown th:nth-child(2),
-.markdown td:nth-child(2) { min-width: 220px; }
-
-.markdown th:nth-child(3),
-.markdown td:nth-child(3) { min-width: 360px; }
-
-.markdown th:nth-child(4),
-.markdown td:nth-child(4) { min-width: 260px; }
-
-.markdown th:nth-child(5),
-.markdown td:nth-child(5) { min-width: 120px; }
-
-.markdown th:nth-child(6),
-.markdown td:nth-child(6) { min-width: 280px; }
 </style>
 </head>
 
 <body>
 
-<!-- ✅ HEADER -->
-<div class="chat-header">Equipment AI Agent</div>
-
-<!-- ✅ CHATBOT -->
 <div id="webchat"></div>
 
 <script>
@@ -113,14 +59,16 @@ html, body {
     const styleOptions = {
         backgroundColor: "#ffffff",
 
+        /* ✅ THIS IS THE REAL FIX */
         bubbleMaxWidth: "90%",
 
+        /* Chat bubbles */
         bubbleBackground: "#F0F6FF",
         bubbleBorderRadius: 14,
-
         bubbleFromUserBackground: "#FFFFFF",
         bubbleFromUserBorderRadius: 14,
 
+        /* Typography */
         primaryFont: "Arial",
         fontSizeSmall: "14px",
         fontSizeMedium: "16px",
