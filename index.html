@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,49 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>AI Assistant</title>
 
-<!-- Web Chat CDN -->
-https://cdn.botframework.com/botframework-webchat/latest/webchat.js
+<!-- Bot Framework Web Chat -->
+<script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
 
 <style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        display: flex;
-        height: 100vh;
-        overflow: hidden;
-        background-color: #ffffff;
-    }
-
-    /* FULL SCREEN CHATBOT */
-    .chat-container {
+    html, body {
         width: 100%;
-        display: flex;
-        flex-direction: column;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
         background: #ffffff;
-    }
-
-    .chat-header {
-        background-color: #005EB8;
-        color: white;
-        padding: 14px;
-        font-size: 20px;
-        font-weight: bold;
-        text-align: center-bottom: 3px solid #D71920;
+        font-family: Arial, sans-serif;
     }
 
     #webchat {
-        flex: 1;
-        height: 100%;
+        width: 100vw;
+        height: 100vh;
     }
 </style>
 </head>
+
 <body>
 
-<!-- FULL SCREEN CHAT -->
-<div class="chat-container">
-    <div class="chat-header">AI Assistant</div>
-    <div id="webchat"></div>
-</div>
+<div id="webchat"></div>
 
 <script>
 (async function () {
@@ -58,8 +38,8 @@ https://cdn.botframework.com/botframework-webchat/latest/webchat.js
     const styleOptions = {
         backgroundColor: "#ffffff",
 
-        // Agent (Copilot) messages
-        bubbleBackground: "#F0F6FF", // soft blue hue
+        // Assistant messages
+        bubbleBackground: "#F0F6FF",
         bubbleBorderRadius: 14,
 
         // User messages
