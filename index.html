@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +7,7 @@
 <title>AI Assistant</title>
 
 <!-- Web Chat CDN -->
-<script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+https://cdn.botframework.com/botframework-webchat/latest/webchat.js
 
 <style>
     body {
@@ -18,40 +19,12 @@
         background-color: #ffffff;
     }
 
-    /* LEFT PANEL */
-    .left-panel {
-        width: 55%;
-        padding: 20px;
-        overflow-y: scroll;
-        background: linear-gradient(180deg, #005EB8, #D71920);
-        color: white;
-        box-sizing: border-box;
-    }
-
-    /* HEADER IMAGE ON LEFT */
-    .header-image {
+    /* FULL SCREEN CHATBOT */
+    .chat-container {
         width: 100%;
-        border-radius: 14px;
-        margin-bottom: 25px;
-        display: block;
-    }
-
-    .content-box {
-        background: rgba(255, 255, 255, 0.15);
-        border-radius: 16px;
-        padding: 20px;
-        margin-bottom: 20px;
-        backdrop-filter: blur(6px);
-        border: 1px solid rgba(255, 255, 255, 0.25);
-    }
-
-    /* RIGHT PANEL (Chatbot) */
-    .right-panel {
-        width: 45%;
         display: flex;
         flex-direction: column;
         background: #ffffff;
-        border-left: 4px solid #005EB8;
     }
 
     .chat-header {
@@ -60,8 +33,7 @@
         padding: 14px;
         font-size: 20px;
         font-weight: bold;
-        text-align: center;
-        border-bottom: 3px solid #D71920;
+        text-align: center-bottom: 3px solid #D71920;
     }
 
     #webchat {
@@ -69,29 +41,11 @@
         height: 100%;
     }
 </style>
-
 </head>
 <body>
 
-<!-- LEFT SIDE -->
-<div class="left-panel">
-
-    <!-- IMAGE INSERTED ON THE LEFT -->
-    <img class="header-image" src="images/Emap.png" alt="Data metrics"/>
-
-    <!-- ORIGINAL LEFT CONTENT SHIFTED BELOW IMAGE -->
-    <h1>Powering Central Europe's Energy Transition</h1>
-    <p>Impact by Country</p>
-
-    <div class="content-box"><h3>Poland</h3><p>Orlen processed 22.4 million tons of crude oil in Poland last quarter, achieving a refinery utilization rate of ~93%.</p></div>
-    <div class="content-box"><h3>Germany</h3><p>In Germany the refining segment delivered a throughput of 4.1 million tons, representing a 4% increase quarter-on-quarter.</p></div>
-    <div class="content-box"><h3>Czechia</h3><p>Orlen’s Czech refining operations processed 5.8 million tons, with diesel output rising 6% versus the previous quarter.</p></div>
-    <div class="content-box"><h3>Norway</h3><p>“In Norway the refinery feedstock volume was 2.3 million tons, supporting an export fraction of approximately 45%.</p></div>
-
-</div>
-
-<!-- RIGHT SIDE (unchanged chatbot) -->
-<div class="right-panel">
+<!-- FULL SCREEN CHAT -->
+<div class="chat-container">
     <div class="chat-header">AI Assistant</div>
     <div id="webchat"></div>
 </div>
@@ -102,18 +56,18 @@
     const { token } = await tokenRes.json();
 
     const styleOptions = {
-  backgroundColor: "#ffffff",
+        backgroundColor: "#ffffff",
 
-  // Agent (Copilot) messages
-  bubbleBackground: "#F0F6FF", // soft blue hue
-  bubbleBorderRadius: 14,
+        // Agent (Copilot) messages
+        bubbleBackground: "#F0F6FF", // soft blue hue
+        bubbleBorderRadius: 14,
 
-  // User messages
-  bubbleFromUserBackground: "#FFFFFF",
-  bubbleFromUserBorderRadius: 14,
+        // User messages
+        bubbleFromUserBackground: "#FFFFFF",
+        bubbleFromUserBorderRadius: 14,
 
-  primaryFont: "Arial"
-};
+        primaryFont: "Arial"
+    };
 
     window.WebChat.renderWebChat(
         {
