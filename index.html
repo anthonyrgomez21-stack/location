@@ -3,134 +3,132 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>AI Assistant</title>
+<title>Equipment Agent</title>
 
-<!-- Bot Framework Web Chat -->
+<!-- Web Chat CDN -->
 <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
 
 <style>
-/* ================================
-   GLOBAL RESET
-================================ */
-html, body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    overflow: hidden;
-    background: #ffffff;
-    font-family: Arial, sans-serif;
-}
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        display: flex;
+        height: 100vh;
+        overflow: hidden;
+        background-color: #ffffff;
+    }
 
-/* Full screen webchat */
-#webchat {
-    width: 100vw;
-    height: 100vh;
-}
+    /* LEFT PANEL */
+    .left-panel {
+        width: 55%;
+        padding: 20px;
+        overflow-y: auto;
+        background: linear-gradient(180deg, #005EB8, #D71920);
+        color: white;
+        box-sizing: border-box;
+    }
 
-/* ================================
-   SAFE MARKDOWN TABLE STYLING
-================================ */
-.markdown {
-    max-width: 100% !important;
-}
+    /* HEADER IMAGE */
+    .header-image {
+        width: 100%;
+        border-radius: 14px;
+        margin-bottom: 25px;
+        display: block;
+    }
 
-/* Table layout */
-.markdown table {
-    width: max-content;      /* don't squish */
-    min-width: 100%;
-    border-collapse: separate;
-    border-spacing: 20px 0;  /* ✅ space between columns */
-    display: block;
-    overflow-x: auto;
-}
+    .content-box {
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 16px;
+        padding: 20px;
+        margin-bottom: 20px;
+        backdrop-filter: blur(6px);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+    }
 
-/* Table cells */
-.markdown th,
-.markdown td {
-    padding: 10px 20px;
-    white-space: nowrap;     /* ✅ keep rows single-line */
-    border: 1px solid #d6dbe6;
-    text-align: left;
-    font-size: 15px;
-}
+    /* RIGHT PANEL */
+    .right-panel {
+        width: 45%;
+        display: flex;
+        flex-direction: column;
+        background: #ffffff;
+        border-left: 4px solid #005EB8;
+    }
 
-/* Header styling */
-.markdown th {
-    background-color: #e6f0ff;
-    font-weight: 700;
-}
+    /* ✅ POLISHED HEADER */
+    .chat-header {
+        background-color: #005EB8;
+        color: #ffffff;
+        padding: 16px 12px;
+        font-size: 22px;
+        font-weight: 600;
+        text-align: center;
+        letter-spacing: 0.5px;
+        border-bottom: 3px solid #D71920; /* thin red line */
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
 
-/* ================================
-   COLUMN WIDTH CONTROL
-   (Created On ≠ Work Order Number)
-================================ */
-
-/* Created On */
-.markdown th:nth-child(1),
-.markdown td:nth-child(1) {
-    min-width: 140px;
-}
-
-/* Work Order Number */
-.markdown th:nth-child(2),
-.markdown td:nth-child(2) {
-    min-width: 220px;
-}
-
-/* Description */
-.markdown th:nth-child(3),
-.markdown td:nth-child(3) {
-    min-width: 360px;
-}
-
-/* Functional Location */
-.markdown th:nth-child(4),
-.markdown td:nth-child(4) {
-    min-width: 260px;
-}
-
-/* Priority */
-.markdown th:nth-child(5),
-.markdown td:nth-child(5) {
-    min-width: 120px;
-}
-
-/* Primary Work Center */
-.markdown th:nth-child(6),
-.markdown td:nth-child(6) {
-    min-width: 280px;
-}
+    #webchat {
+        flex: 1;
+        height: 100%;
+    }
 </style>
 </head>
 
 <body>
 
-<div id="webchat"></div>
+<!-- LEFT PANEL -->
+<div class="left-panel">
+
+    <img class="header-image" src="images/Emap.png" alt="Data metrics" />
+
+    <h1>Powering Central Europe's Energy Transition</h1>
+    <p>Impact by Country</p>
+
+    <div class="content-box">
+        <h3>Poland</h3>
+        <p>Orlen processed 22.4 million tons of crude oil in Poland last quarter, achieving a refinery utilization rate of ~93%.</p>
+    </div>
+
+    <div class="content-box">
+        <h3>Germany</h3>
+        <p>In Germany the refining segment delivered a throughput of 4.1 million tons, representing a 4% increase quarter-on-quarter.</p>
+    </div>
+
+    <div class="content-box">
+        <h3>Czechia</h3>
+        <p>Orlen’s Czech refining operations processed 5.8 million tons, with diesel output rising 6% versus the previous quarter.</p>
+    </div>
+
+    <div class="content-box">
+        <h3>Norway</h3>
+        <p>In Norway the refinery feedstock volume was 2.3 million tons, supporting an export fraction of approximately 45%.</p>
+    </div>
+
+</div>
+
+<!-- RIGHT PANEL -->
+<div class="right-panel">
+    <div class="chat-header">Equipment Agent</div>
+    <div id="webchat"></div>
+</div>
 
 <script>
 (async function () {
-    const tokenRes = await fetch("https://92090669134ce372b182b6f53013f4.0b.environment.api.powerplatform.com/powervirtualagents/botsbyschema/crbf0_agent2_uPuGjw/directline/token?api-version=2022-03-01-preview");
+    const tokenRes = await fetch(
+        "https://92090669134ce372b182b6f53013f4.0b.environment.api.powerplatform.com/powervirtualagents/botsbyschema/crbf0_agent2_uPuGjw/directline/token?api-version=2022-03-01-preview"
+    );
     const { token } = await tokenRes.json();
 
     const styleOptions = {
         backgroundColor: "#ffffff",
 
-        /* ✅ NATURAL, SUPPORTED BUBBLE STRETCH */
-        bubbleMaxWidth: "90%",
-
-        /* Assistant bubbles */
         bubbleBackground: "#F0F6FF",
         bubbleBorderRadius: 14,
 
-        /* User bubbles */
         bubbleFromUserBackground: "#FFFFFF",
         bubbleFromUserBorderRadius: 14,
 
-        /* Typography */
-        primaryFont: "Arial",
-        fontSizeSmall: "14px",
-        fontSizeMedium: "16px",
-        fontSizeLarge: "18px"
+        primaryFont: "Arial"
     };
 
     window.WebChat.renderWebChat(
